@@ -1,0 +1,15 @@
+pyyaml
+matplotlib
+joblib
+pandas
+tqdm
+scipy
+sympy
+scikit-learn
+torch
+pykan
+tabulate
+seaborn
+statsmodels
+tueplots
+jupyter
