@@ -1,12 +1,4 @@
-import os
-import numpy as np
-import matplotlib.pyplot as plt
-from joblib import Parallel, delayed
-import pickle
-from tabulate import tabulate
-import time
-
-from kan_model import kan_net
+from models.kan_model import kan_net
 from utils import load_data, get_width
 
 
@@ -144,8 +136,8 @@ import pickle
 from tabulate import tabulate
 import time
 
-from mlp_model import mlp_net
-from utils import load_data, get_dims_mlp
+from models.mlp_model import mlp_net
+from utils.utils_results import load_data, get_dims_mlp
 
 
 def process_train_instance_mlp(params):  # This is the function that will be parallelized
@@ -436,7 +428,7 @@ if __name__ == '__main__':
 
 
         transparency = 0.9
-        from tueplots import axes, bundles, figsizes, fonts
+        from tueplots import axes, bundles
 
         with plt.rc_context({**bundles.iclr2024(ncols=2),
                              # **fonts.iclr2024(),

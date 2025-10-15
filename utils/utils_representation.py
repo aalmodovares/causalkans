@@ -296,22 +296,3 @@ def get_formula_values(formula, x_in):  # Expression that takes a sympy expressi
             f = f.subs(col_names[j], x[i, j])
         fval[i] = float(f)
     return fval
-
-def plot_function(x, y, label, dashed=False, color=None, dotted=False): # Ancillary plot function
-    # Keep only the unique values of X and sort them to plot
-    x_unique = np.unique(x)
-    x_unique.sort()
-    y_unique = []
-    for x_i in x_unique:
-        # Find the first appearance of x_i in x (in case it appears multiple times)
-        idx = np.where(x == x_i)[0][0]
-        y_unique.append(y[idx])
-    linestyle = 'solid'
-    if dashed:
-        linestyle = 'dashed'
-    if dotted:
-        linestyle = 'dotted'
-    if color is None:
-        plt.plot(x_unique, y_unique, 'o', linestyle=linestyle, label=label)
-    else:
-        plt.plot(x_unique, y_unique, 'o', linestyle=linestyle, label=label, color=color)

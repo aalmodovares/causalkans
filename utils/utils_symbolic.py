@@ -6,7 +6,8 @@ import sympy
 import os
 
 from scipy.optimize import minimize as minimize
-# from stochopy.optimize import minimize as sminimize  # Note that this is only needed if using stochastic optimization, e.g., PSO. If not, can be commented out
+# from stochopy.optimize import minimize as sminimize  # Note that this is only needed if using stochastic optimization,
+# e.g., PSO. If not, can be commented out
 from sklearn.metrics import mean_absolute_error, r2_score
 #
 # from models import get_model, get_metrics

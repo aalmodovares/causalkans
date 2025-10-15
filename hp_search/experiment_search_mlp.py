@@ -9,8 +9,8 @@ from scipy.stats import ttest_ind_from_stats
 import time
 
 # from kan_model import kan_net
-from mlp_model import mlp_net
-from utils import load_data, get_dims_mlp
+from models.mlp_model import mlp_net
+from utils.utils_results import load_data, get_dims_mlp
 
 
 def model_pipeline(model, x_train, y_train, t_train, x_test, y_test, t_test, plot_flag=False, lr=0.001, **kwargs):
@@ -67,7 +67,7 @@ def process_job(i, params, dataset):
     for model_name in ['slearner', 'tlearner', 'tarnet', 'dragonnet']:
         dims = get_dims_mlp(model_name, x_train.shape[1], params['hidden_dims'][model_name])
         model = mlp_net(model_name, dims, seed=i, try_gpu=False, real_ite_train=real_ite_train, real_ite_test=real_ite_test, model_id=f'{model_name}_{i}_{dataset}',
-                        save_folder='checkpoints_search_mlp', activation=params['activation'], dropout=params['dropout'])
+                        save_folder='../checkpoints_search_mlp', activation=params['activation'], dropout=params['dropout'])
         res = model_pipeline(model, x_train, y_train, t_train, x_test, y_test, t_test, lr=params['lr'])
         ite = res['y_pred_1'] - res['y_pred_0']
         r[f'ate_{model_name}'] = np.mean(ite)
@@ -220,14 +220,14 @@ if __name__ == '__main__':
         EPOCHS=10
 
     if train_flag:
-        os.makedirs('./search_experiment_mlp', exist_ok=True)
+        os.makedirs('../search_experiment_mlp', exist_ok=True)
         for dataset in datasets:
             for h_index, hidden_dim in enumerate(hidden_dims):
                 for dropout in dropouts:
                     for lr in lrs:
                         for activation in activations:
 
-                            file_name = os.path.join('search_experiment_mlp', f"results_{dataset}_{h_index}_{dropout}_{lr}_{activation}.pkl")
+                            file_name = os.path.join('../search_experiment_mlp', f"results_{dataset}_{h_index}_{dropout}_{lr}_{activation}.pkl")
                             if os.path.exists(file_name) and resume_training:
                                 print(f"File {file_name} already exists. Skipping...")
                             else:
@@ -243,7 +243,7 @@ if __name__ == '__main__':
             for dropout in dropouts:
                 for lr in lrs:
                     for activation in activations:
-                        file_name = os.path.join('search_experiment_mlp', f"results_{dataset}_{h_index}_{dropout}_{lr}_{activation}.pkl")
+                        file_name = os.path.join('../search_experiment_mlp', f"results_{dataset}_{h_index}_{dropout}_{lr}_{activation}.pkl")
                         if os.path.exists(file_name):
                             with open(file_name, 'rb') as f:
                                 res = pickle.load(f)
