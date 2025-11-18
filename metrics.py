@@ -1,5 +1,5 @@
 from models.kan_model import kan_net
-from utils import load_data, get_width
+from utils.utils_results import load_data, get_width
 
 
 def process_train_instance_kan(params):  # This is the function that will be parallelized
